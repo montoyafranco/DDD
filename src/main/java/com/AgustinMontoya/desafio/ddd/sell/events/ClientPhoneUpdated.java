@@ -1,4 +1,4 @@
 package com.AgustinMontoya.desafio.ddd.sell.events;
 
-public class ClientDNIUpdated {
+public class ClientPhoneUpdated {
 }

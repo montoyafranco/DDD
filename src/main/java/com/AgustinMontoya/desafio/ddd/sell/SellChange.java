@@ -1,4 +1,9 @@
 package com.AgustinMontoya.desafio.ddd.sell;
 
-public class SellChange {
+import co.com.sofka.domain.generic.EventChange;
+
+public class SellChange extends EventChange {
+    public SellChange(Sell sell){
+
+    }
 }

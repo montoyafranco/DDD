@@ -16,6 +16,6 @@ public class Sell extends AggregateEvent<SaleID> {
     public Sell(SaleID entityId , Sale_Status sale_status) {
         super(entityId);
         appendChange(new SaleCreated(sale_status)).apply();
-        subscribe(new SaleChange(this));
+        subscribe(new SellChange(this));
     }
 }
