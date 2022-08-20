@@ -2,10 +2,7 @@ package com.AgustinMontoya.desafio.ddd.store;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import com.AgustinMontoya.desafio.ddd.store.events.DepositCreated;
-import com.AgustinMontoya.desafio.ddd.store.events.ManagerCreated;
-import com.AgustinMontoya.desafio.ddd.store.events.OwnerCreated;
-import com.AgustinMontoya.desafio.ddd.store.events.StoreCreated;
+import com.AgustinMontoya.desafio.ddd.store.events.*;
 import com.AgustinMontoya.desafio.ddd.store.values.*;
 
 import java.util.List;
@@ -55,6 +52,33 @@ public class Store extends AggregateEvent<StoreID> {
 
         appendChange(new ManagerCreated(entityId,managerName ,managerMail )).apply();
     }
+    public void updateAddres(AddressStore addressStore){
+        Objects.requireNonNull(addressStore) ;
+        appendChange(new AddresUpdated(addressStore)).apply();
+
+    }
+    public void updateStatus(StatusStore statusStore){
+        Objects.requireNonNull(statusStore) ;
+        appendChange(new StatusUpdated(statusStore)).apply();
+
+    }
+    public void updatePhone(OwnerPhone ownerPhone){
+        Objects.requireNonNull(ownerPhone) ;
+        appendChange(new UpdatedPhoneOwner(ownerPhone)).apply();
+
+    }
+    public void updateMailManager(ManagerMail managerMail){
+        Objects.requireNonNull(managerMail) ;
+        appendChange(new ManagerMailUpdated(managerMail)).apply();
+
+    }
+    public void updateCapacity(DepositCapacity depositCapacity){
+        Objects.requireNonNull(depositCapacity) ;
+        appendChange(new CapacityUpdated(depositCapacity)).apply();
+    }
+
+
+
 
     public StatusStore getStatusStore() {        return statusStore;
     }

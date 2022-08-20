@@ -5,9 +5,11 @@ import com.AgustinMontoya.desafio.ddd.store.values.OwnerID;
 import com.AgustinMontoya.desafio.ddd.store.values.OwnerName;
 import com.AgustinMontoya.desafio.ddd.store.values.OwnerPhone;
 
+import java.util.Objects;
+
 public class Owner extends Entity<OwnerID> {
-    private  OwnerName ownerName;
-    private  OwnerPhone ownerPhone;
+    protected OwnerName ownerName;
+    protected OwnerPhone ownerPhone;
 
     public Owner(OwnerID entityId, OwnerName ownerName, OwnerPhone ownerPhone) {
         super(entityId);
@@ -24,4 +26,10 @@ public class Owner extends Entity<OwnerID> {
     public OwnerPhone ownerPhone() {
         return ownerPhone;
     }
+
+    public void updatePhoneOwner(OwnerPhone ownerPhone){
+        this.ownerPhone = Objects.requireNonNull(ownerPhone);
+    }
+
+
 }

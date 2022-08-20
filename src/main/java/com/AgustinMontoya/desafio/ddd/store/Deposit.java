@@ -5,8 +5,10 @@ import com.AgustinMontoya.desafio.ddd.store.values.DepositCapacity;
 import com.AgustinMontoya.desafio.ddd.store.values.DepositID;
 import com.AgustinMontoya.desafio.ddd.store.values.StoreID;
 
+import java.util.Objects;
+
 public class Deposit extends Entity<DepositID>  {
-    private  DepositCapacity depositCapacity;
+    protected DepositCapacity depositCapacity;
 
     public Deposit(DepositID depositID, DepositCapacity depositCapacity ) {
         super(depositID);
@@ -16,5 +18,9 @@ public class Deposit extends Entity<DepositID>  {
 
     public DepositCapacity depositCapacity() {
         return depositCapacity;
+    }
+    public void updateCapacity(DepositCapacity depositCapacity){
+        this.depositCapacity = Objects.requireNonNull(depositCapacity);
+
     }
 }

@@ -8,8 +8,8 @@ import com.AgustinMontoya.desafio.ddd.store.values.ManagerName;
 import java.util.Objects;
 
 public class Manager extends Entity<ManagerID> {
-    private  ManagerName managerName;
-    private  ManagerMail managerMail;
+    protected ManagerName managerName;
+    protected ManagerMail managerMail;
 
     public Manager(ManagerID entityId, ManagerName managerName , ManagerMail managerMail) {
         super(entityId);
