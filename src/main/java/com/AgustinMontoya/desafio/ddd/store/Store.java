@@ -1,10 +1,15 @@
 package com.AgustinMontoya.desafio.ddd.store;
 
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
+import com.AgustinMontoya.desafio.ddd.store.events.DepositCreated;
+import com.AgustinMontoya.desafio.ddd.store.events.ManagerCreated;
+import com.AgustinMontoya.desafio.ddd.store.events.OwnerCreated;
 import com.AgustinMontoya.desafio.ddd.store.events.StoreCreated;
-import com.AgustinMontoya.desafio.ddd.store.values.AddressStore;
-import com.AgustinMontoya.desafio.ddd.store.values.StatusStore;
-import com.AgustinMontoya.desafio.ddd.store.values.StoreID;
+import com.AgustinMontoya.desafio.ddd.store.values.*;
+
+import java.util.List;
+import java.util.Objects;
 
 public class Store extends AggregateEvent<StoreID> {
     protected StatusStore statusStore;
@@ -19,5 +24,65 @@ public class Store extends AggregateEvent<StoreID> {
     public Store(StoreID entityId, AddressStore addressStore, StatusStore statusStore) {
         super(entityId);
         appendChange(new StoreCreated(addressStore,statusStore)).apply();
+    }
+    private Store(StoreID entityId){
+        super(entityId);
+        subscribe(new StoreChange(this));
+    }
+    public static Store from(StoreID storeID, List<DomainEvent> events){
+        var store = new Store(storeID);
+        events.forEach(store::applyEvent);
+        return store;
+
+
+    }
+    public void createOwner(OwnerID entityId, OwnerName ownerName, OwnerPhone ownerPhone){
+        Objects.requireNonNull(entityId);
+        Objects.requireNonNull(ownerName);
+        Objects.requireNonNull(ownerPhone);
+        appendChange(new OwnerCreated(entityId, ownerName, ownerPhone)).apply();
+    }
+    public void createDeposit(DepositID entityId, DepositCapacity depositCapacity ){
+        Objects.requireNonNull(entityId);
+        Objects.requireNonNull(depositCapacity) ;
+
+        appendChange(new DepositCreated(entityId,depositCapacity )).apply();
+    }
+    public void createManager(ManagerID entityId, ManagerName managerName , ManagerMail managerMail){
+        Objects.requireNonNull(entityId);
+        Objects.requireNonNull(managerName) ;
+        Objects.requireNonNull(managerMail) ;
+
+        appendChange(new ManagerCreated(entityId,managerName ,managerMail )).apply();
+    }
+
+    public StatusStore getStatusStore() {        return statusStore;
+    }
+
+    public void setStatusStore(StatusStore statusStore) {        this.statusStore = statusStore;
+    }
+
+    public AddressStore getAddressStore() {        return addressStore;
+    }
+
+    public void setAddressStore(AddressStore addressStore) {        this.addressStore = addressStore;
+    }
+
+    public Owner getOwner() {        return owner;
+    }
+
+    public void setOwner(Owner owner) {        this.owner = owner;
+    }
+
+    public Deposit getDeposit() {        return deposit;
+    }
+
+    public void setDeposit(Deposit deposit) {        this.deposit = deposit;
+    }
+
+    public Manager getManager() {        return manager;
+    }
+
+    public void setManager(Manager manager) {        this.manager = manager;
     }
 }
