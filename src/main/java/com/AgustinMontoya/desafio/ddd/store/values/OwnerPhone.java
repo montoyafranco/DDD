@@ -1,4 +1,10 @@
 package com.AgustinMontoya.desafio.ddd.store.values;
 
-public class OwnerPhone {
+import co.com.sofka.domain.generic.ValueObject;
+
+public class OwnerPhone implements ValueObject<String> {
+    @Override
+    public String value() {
+        return null;
+    }
 }

@@ -1,4 +1,6 @@
 package com.AgustinMontoya.desafio.ddd.store.values;
 
-public class ManagerID {
+import co.com.sofka.domain.generic.Identity;
+
+public class ManagerID extends Identity {
 }

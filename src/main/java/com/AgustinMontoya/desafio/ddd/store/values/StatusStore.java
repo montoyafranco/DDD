@@ -1,4 +1,10 @@
 package com.AgustinMontoya.desafio.ddd.store.values;
 
-public class StatusStore {
+import co.com.sofka.domain.generic.ValueObject;
+
+public class StatusStore implements ValueObject<String> {
+    @Override
+    public String value() {
+        return null;
+    }
 }

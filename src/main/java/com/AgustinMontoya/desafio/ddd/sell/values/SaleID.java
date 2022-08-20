@@ -1,4 +1,6 @@
 package com.AgustinMontoya.desafio.ddd.sell.values;
 
-public class SaleID {
+import co.com.sofka.domain.generic.Identity;
+
+public class SaleID extends Identity {
 }

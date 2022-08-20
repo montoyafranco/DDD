@@ -1,4 +1,6 @@
 package com.AgustinMontoya.desafio.ddd.store.values;
 
-public class OwnerID {
+import co.com.sofka.domain.generic.Identity;
+
+public class OwnerID extends Identity {
 }

@@ -1,4 +1,6 @@
 package com.AgustinMontoya.desafio.ddd.store.values;
 
-public class DepositID {
+import co.com.sofka.domain.generic.Identity;
+
+public class DepositID extends Identity {
 }

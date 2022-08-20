@@ -1,4 +1,10 @@
 package com.AgustinMontoya.desafio.ddd.sell.values;
 
-public class SellerSalesQuantity {
+import co.com.sofka.domain.generic.ValueObject;
+
+public class SellerSalesQuantity implements ValueObject<String> {
+    @Override
+    public String value() {
+        return null;
+    }
 }
