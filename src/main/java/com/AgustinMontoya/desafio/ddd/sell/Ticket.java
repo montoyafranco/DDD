@@ -7,8 +7,8 @@ import java.util.Objects;
 
 public class Ticket extends Entity<TicketID> {
 
-    private  TicketAmount ticketAmount;
-    private  TicketTimeStamp ticketTimeStamp;
+    protected TicketAmount ticketAmount;
+    protected TicketTimeStamp ticketTimeStamp;
 
     public Ticket(TicketID entityId, TicketAmount ticketAmount , TicketTimeStamp ticketTimeStamp) {
         super(entityId);

@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public class Client extends Entity<ClientID> {
 
-    private  ClientName clientName;
-    private  ClientPhone clientPhone;
+    protected ClientName clientName;
+    protected ClientPhone clientPhone;
 
     public Client(ClientID entityId, ClientName clientName , ClientPhone clientPhone) {
         super(entityId);

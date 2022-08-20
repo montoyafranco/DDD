@@ -8,8 +8,8 @@ import java.util.Objects;
 public class Product extends Entity<ProductID> {
 
 
-    private ProductName productName;
-    private ProductPrice productPrice;
+    protected ProductName productName;
+    protected ProductPrice productPrice;
 
     public Product(ProductID entityId,ProductName productName, ProductPrice productPrice) {
         super(entityId);

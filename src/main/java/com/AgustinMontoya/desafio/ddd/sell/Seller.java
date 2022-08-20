@@ -7,8 +7,8 @@ import java.util.Objects;
 
 public class Seller extends Entity<SellerID> {
 
-    private  SellerName sellerName;
-    private  SellerSalesQuantity sellerSalesQuantity;
+    protected SellerName sellerName;
+    protected SellerSalesQuantity sellerSalesQuantity;
 
     public Seller(SellerID entityId, SellerName sellerName , SellerSalesQuantity sellerSalesQuantity) {
         super(entityId);
