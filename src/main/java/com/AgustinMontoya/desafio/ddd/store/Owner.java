@@ -31,5 +31,5 @@ public class Owner extends Entity<OwnerID> {
         this.ownerPhone = Objects.requireNonNull(ownerPhone);
     }
 
-
+    public void paySalarry(){}
 }

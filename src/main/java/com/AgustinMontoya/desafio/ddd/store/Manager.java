@@ -19,7 +19,10 @@ public class Manager extends Entity<ManagerID> {
     public void updateMailManager(ManagerMail managerMail){
         this.managerMail = Objects.requireNonNull(managerMail);
     }
-    public void contactManager() {    }
+
+    public void contactManager(ManagerMail managerMail){
+        this.managerMail = Objects.requireNonNull(managerMail);
+    }
     public ManagerName ManagerName() {
         return managerName;
     }

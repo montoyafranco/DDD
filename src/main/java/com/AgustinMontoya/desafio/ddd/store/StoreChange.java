@@ -3,6 +3,7 @@ package com.AgustinMontoya.desafio.ddd.store;
 import co.com.sofka.domain.generic.EventChange;
 import com.AgustinMontoya.desafio.ddd.store.events.*;
 import com.AgustinMontoya.desafio.ddd.store.values.AddressStore;
+import com.AgustinMontoya.desafio.ddd.store.values.DepositID;
 import com.AgustinMontoya.desafio.ddd.store.values.StatusStore;
 
 public class StoreChange extends EventChange {
@@ -14,7 +15,7 @@ public class StoreChange extends EventChange {
         });
         apply((DepositCreated event) ->{
 
-            store.deposit.depositCapacity = event.getDepositCapacity();
+            store.deposit = new Deposit(event.EntityId(), event.getDepositCapacity());
 
         });
         apply((ManagerCreated event) ->{
@@ -49,10 +50,22 @@ public class StoreChange extends EventChange {
             store.updateStatus(event.getStatusStore());
 
         });
+        apply((SallariedPayed event) ->{
+            store.owner.updatePhoneOwner(event.getOwnerPhone());
 
-//        ownerContacted_manager
-//        providercontacted
-//        salarrypayed
+        });
+        apply((OwnerContacted_Manager event) ->{
+            store.manager.contactManager(event.getManagerMail());
+
+        });
+        apply((ProviderContacted event) ->{
+            store.deposit.contactProvider(event.getDepositCapacity());
+
+        });
+
+
+
+
 
 
 

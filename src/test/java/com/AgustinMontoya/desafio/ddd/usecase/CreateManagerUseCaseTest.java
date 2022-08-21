@@ -29,6 +29,9 @@ class CreateManagerUseCaseTest {
 
     @Test
     void TestAddManager(){
+
+        var event = new StoreCreated(new AddressStore("hola"),new StatusStore("hola"));
+        event.setAggregateRootId("xxxx");
         //arrange
         StoreID storeID = StoreID.of("agus");
         ManagerName nombre = new ManagerName("Boss");
@@ -36,7 +39,7 @@ class CreateManagerUseCaseTest {
 
         var command = new AddManager( nombre,managerMail, storeID);
 
-        when(repository.getEventsBy("agus")).thenReturn(listOfEvents());
+        when(repository.getEventsBy("agus")).thenReturn(List.of(event));
         UseCase.addRepository(repository);
         //act
 
@@ -47,17 +50,11 @@ class CreateManagerUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var event = (ManagerCreated)events.get(0);
-        Assertions.assertEquals(command.getManagerName(), event.getManagerName());
+        var event1 = (ManagerCreated)events.get(0);
+        Assertions.assertEquals(command.getManagerName(), event1.getManagerName());
 
     }
-    private List<DomainEvent> listOfEvents() {
 
-
-        var event = new StoreCreated(new AddressStore("hola"),new StatusStore("hola"));
-        event.setAggregateRootId("xxxx");
-        return List.of(event);
-    }
 
 
 }

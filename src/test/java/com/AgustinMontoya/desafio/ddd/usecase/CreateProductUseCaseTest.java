@@ -24,19 +24,23 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CreateProductUseCaseTest {
-    @InjectMocks
-    private CreateProductUseCase useCase;
+
 
     @Mock
     private DomainEventRepository repository;
 
     @Test
     void testProduct(){
+        var useCase = new CreateProductUseCase();
+
+        Sale_Status status = new Sale_Status("abierto");
+        var event = new SaleCreated(status);
+        event.setAggregateRootId("agua");
         //arrange
 
         var command = new AddProduct(new SaleID("agua"), new ProductName("agua"),  new ProductPrice("agua"));
 
-        when(repository.getEventsBy("agua")).thenReturn(listOfEvents());
+        when(repository.getEventsBy("agua")).thenReturn(List.of(event));
         useCase.addRepository(repository);
 
         //act
@@ -47,15 +51,10 @@ class CreateProductUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var event = (ProductCreated)events.get(0);
-        Assertions.assertEquals("agua", event.getProductName().value());
+        var event1 = (ProductCreated)events.get(0);
+        Assertions.assertEquals("agua", event1.getProductName().value());
 
     }
 
-    private List<DomainEvent> listOfEvents() {
-        Sale_Status status = new Sale_Status("abierto");
-        var event = new SaleCreated(status);
-        event.setAggregateRootId("agua");
-        return List.of(event);
-    }
+
 }

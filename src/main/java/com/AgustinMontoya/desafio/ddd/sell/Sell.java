@@ -65,6 +65,41 @@ public class Sell extends AggregateEvent<SaleID> {
         appendChange(new StatusUpdated(sale_status)).apply();
 
     }
+    public void cumpleMetasVentas(SellerSalesQuantity sellerSalesQuantity){
+        Objects.requireNonNull(sellerSalesQuantity);
+        appendChange(new ChequeadoMetasVentas(sellerSalesQuantity)).apply();
+    }
+    public void updateSellerName(SellerName sellerName){
+        Objects.requireNonNull(sellerName);
+        appendChange(new SellerNameUpdated(sellerName)).apply();
+
+    }
+
+    public void updateClientName(ClientName clientName){
+        Objects.requireNonNull(clientName);
+        appendChange(new ClientNameUpdated(clientName)).apply();
+    }
+    public void updateClientPhone(ClientPhone clientPhone){
+        Objects.requireNonNull(clientPhone);
+        appendChange(new ClientPhoneUpdated(clientPhone)).apply();
+    }
+    public void updateProductName(ProductName productName){
+        Objects.requireNonNull(productName);
+        appendChange(new ProductNameUpdated(productName)).apply();
+    }
+    public void updateProductPrice(ProductPrice productPrice){
+        Objects.requireNonNull(productPrice);
+        appendChange(new ProductPriceUpdated(productPrice)).apply();
+    }
+    public void updateAmountTicket(TicketAmount ticketAmount){
+        Objects.requireNonNull(ticketAmount);
+        appendChange(new TicketAmountUpdated(ticketAmount)).apply();
+
+    }
+    public void updateTimeTicket(TicketTimeStamp ticketTimeStamp){
+        Objects.requireNonNull(ticketTimeStamp);
+        appendChange(new TicketTimeUpdated(ticketTimeStamp)).apply();
+    }
 
     public Sale_Status sale_status() {
         return sale_status;

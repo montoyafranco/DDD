@@ -62,7 +62,7 @@ public class Store extends AggregateEvent<StoreID> {
         appendChange(new StatusUpdated(statusStore)).apply();
 
     }
-    public void updatePhone(OwnerPhone ownerPhone){
+    public void updatePhoneOwner(OwnerPhone ownerPhone){
         Objects.requireNonNull(ownerPhone) ;
         appendChange(new UpdatedPhoneOwner(ownerPhone)).apply();
 
@@ -72,9 +72,23 @@ public class Store extends AggregateEvent<StoreID> {
         appendChange(new ManagerMailUpdated(managerMail)).apply();
 
     }
+    public void contactManager(ManagerMail managerMail){
+        Objects.requireNonNull(managerMail) ;
+        appendChange(new OwnerContacted_Manager(managerMail)).apply();
+
+    }
     public void updateCapacity(DepositCapacity depositCapacity){
         Objects.requireNonNull(depositCapacity) ;
         appendChange(new CapacityUpdated(depositCapacity)).apply();
+    }
+    public void paySallariesOwner(OwnerPhone ownerPhone){
+        Objects.requireNonNull(ownerPhone) ;
+        appendChange(new SallariedPayed(ownerPhone)).apply();
+
+    }
+    public void contactProvider(DepositCapacity depositCapacity){
+        Objects.requireNonNull(depositCapacity) ;
+        appendChange(new ProviderContacted(depositCapacity)).apply();
     }
 
 

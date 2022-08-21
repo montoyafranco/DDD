@@ -23,4 +23,8 @@ public class Deposit extends Entity<DepositID>  {
         this.depositCapacity = Objects.requireNonNull(depositCapacity);
 
     }
+    public void contactProvider(DepositCapacity depositCapacity){
+        this.depositCapacity = Objects.requireNonNull(depositCapacity);
+
+    }
 }

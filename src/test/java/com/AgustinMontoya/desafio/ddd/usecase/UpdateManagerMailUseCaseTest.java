@@ -4,10 +4,9 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import com.AgustinMontoya.desafio.ddd.store.commands.AddManager;
-import com.AgustinMontoya.desafio.ddd.store.commands.AddOwner;
+import com.AgustinMontoya.desafio.ddd.store.commands.UpdateMailManager;
 import com.AgustinMontoya.desafio.ddd.store.events.ManagerCreated;
-import com.AgustinMontoya.desafio.ddd.store.events.OwnerCreated;
+import com.AgustinMontoya.desafio.ddd.store.events.ManagerMailUpdated;
 import com.AgustinMontoya.desafio.ddd.store.events.StoreCreated;
 import com.AgustinMontoya.desafio.ddd.store.values.*;
 import org.junit.jupiter.api.Assertions;
@@ -15,46 +14,46 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-@ExtendWith(MockitoExtension.class)
-class CreateOwnerUseCaseTest {
 
+@ExtendWith(MockitoExtension.class)
+class UpdateManagerMailUseCaseTest {
 
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    void TestAddOwner(){
+    public void testManagerUpdate() {
+        var useCase = new  UpdateManagerMailUseCase();
 
-        var useCase = new CreateOwnerUseCase();
-
-        var event = new StoreCreated(new AddressStore("hola"),new StatusStore("hola"));
-        event.setAggregateRootId("xxxx");
-        //arrange
+        var event = new StoreCreated(new AddressStore("Agus"),new StatusStore("open"));
+        event.setAggregateRootId("agus");
+        var event2 = new ManagerCreated(ManagerID.of("agus"),new ManagerName("agus"),new ManagerMail("lalo@gmail.com"));
 
 
-        var command = new AddOwner(new OwnerName("Agus"),new OwnerPhone("456"),new StoreID("41"));
-
-        when(repository.getEventsBy("41")).thenReturn(List.of(event));
+    //arrange
+    var command = new UpdateMailManager(new ManagerMail("agus@gmail.com"), StoreID.of("agus"));
+        Mockito.when(repository.getEventsBy("agus")).thenReturn(List.of(event,event2));
         useCase.addRepository(repository);
-        //act
 
+        //act
         var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(command.getStoreID().value())
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()
                 .getDomainEvents();
+//assert
+        var event3 = (ManagerMailUpdated)events.get(0);
+        Assertions.assertEquals(command.getManagerMail(), event3.getManagerMail());
+        Mockito.verify(repository).getEventsBy("agus");
 
-        //assert
-        var event1 = (OwnerCreated)events.get(0);
-        Assertions.assertEquals(command.getOwnerName(), event1.getOwnerName());
-
-    }
+}
 
 
 }
