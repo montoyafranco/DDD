@@ -5,7 +5,9 @@ import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.AgustinMontoya.desafio.ddd.store.commands.AddManager;
+import com.AgustinMontoya.desafio.ddd.store.commands.AddOwner;
 import com.AgustinMontoya.desafio.ddd.store.events.ManagerCreated;
+import com.AgustinMontoya.desafio.ddd.store.events.OwnerCreated;
 import com.AgustinMontoya.desafio.ddd.store.events.StoreCreated;
 import com.AgustinMontoya.desafio.ddd.store.values.*;
 import org.junit.jupiter.api.Assertions;
@@ -17,26 +19,24 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
-class CreateManagerUseCaseTest {
+class CreateOwnerUseCaseTest {
     @InjectMocks
-    private CreateManagerUseCase UseCase;
+    private CreateOwnerUseCase UseCase;
 
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    void TestAddManager(){
+    void TestAddOwner(){
         //arrange
-        StoreID storeID = StoreID.of("agus");
-        ManagerName nombre = new ManagerName("Boss");
-        ManagerMail managerMail = new ManagerMail("Boss");
 
-        var command = new AddManager( nombre,managerMail, storeID);
 
-        when(repository.getEventsBy("agus")).thenReturn(listOfEvents());
+        var command = new AddOwner(new OwnerName("Agus"),new OwnerPhone("456"),new StoreID("41"));
+
+        when(repository.getEventsBy("41")).thenReturn(listOfEvents());
         UseCase.addRepository(repository);
         //act
 
@@ -47,8 +47,8 @@ class CreateManagerUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var event = (ManagerCreated)events.get(0);
-        Assertions.assertEquals(command.getManagerName(), event.getManagerName());
+        var event = (OwnerCreated)events.get(0);
+        Assertions.assertEquals(command.getOwnerName(), event.getOwnerName());
 
     }
     private List<DomainEvent> listOfEvents() {
@@ -58,6 +58,5 @@ class CreateManagerUseCaseTest {
         event.setAggregateRootId("xxxx");
         return List.of(event);
     }
-
 
 }

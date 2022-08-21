@@ -16,12 +16,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,7 +36,7 @@ class CreateProductUseCaseTest {
 
         var command = new AddProduct(new SaleID("agua"), new ProductName("agua"),  new ProductPrice("agua"));
 
-        when(repository.getEventsBy("agua")).thenReturn(history());
+        when(repository.getEventsBy("agua")).thenReturn(listOfEvents());
         useCase.addRepository(repository);
 
         //act
@@ -54,7 +52,7 @@ class CreateProductUseCaseTest {
 
     }
 
-    private List<DomainEvent> history() {
+    private List<DomainEvent> listOfEvents() {
         Sale_Status status = new Sale_Status("abierto");
         var event = new SaleCreated(status);
         event.setAggregateRootId("agua");

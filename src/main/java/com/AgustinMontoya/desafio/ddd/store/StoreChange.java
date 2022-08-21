@@ -24,8 +24,7 @@ public class StoreChange extends EventChange {
         });
 
         apply((OwnerCreated event) ->{
-            store.owner.ownerName = event.getOwnerName();
-            store.owner.ownerPhone = event.getOwnerPhone();
+            store.owner = new Owner(event.getEntityId(),event.getOwnerName(), event.getOwnerPhone());
 
         });
         apply((UpdatedPhoneOwner event) ->{
