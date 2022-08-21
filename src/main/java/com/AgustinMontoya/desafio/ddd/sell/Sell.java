@@ -42,11 +42,11 @@ public class Sell extends AggregateEvent<SaleID> {
         Objects.requireNonNull(clientPhone);
         appendChange(new ClientCreated(entityId, clientName, clientPhone)).apply();
     }
-    public void createProduct(ProductID entityId,ProductName productName, ProductPrice productPrice){
-        Objects.requireNonNull(entityId);
+    public void createProduct(ProductID productID ,ProductName productName, ProductPrice productPrice){
+
         Objects.requireNonNull(productName);
         Objects.requireNonNull(productPrice);
-        appendChange(new ProductCreated(entityId, productName, productPrice)).apply();
+        appendChange(new ProductCreated(productID, productName, productPrice)).apply();
     }
     public void createSeller(SellerID entityId, SellerName sellerName , SellerSalesQuantity sellerSalesQuantity){
         Objects.requireNonNull(entityId);

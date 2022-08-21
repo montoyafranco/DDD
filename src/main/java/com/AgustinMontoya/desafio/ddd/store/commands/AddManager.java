@@ -12,17 +12,14 @@ public class AddManager extends Command {
 
         this.managerName = managerName;
         this.managerMail = managerMail;
-        this.storeID = storeID;
-    }
+        this.storeID = storeID;    }
 
     public ManagerName getManagerName() {
         return managerName;
     }
-
     public ManagerMail getManagerMail() {
         return managerMail;
     }
-
     public StoreID getStoreID() {
         return storeID;
     }

@@ -14,8 +14,7 @@ public class SellChange extends EventChange {
             sell.client.clientPhone = event.getClientPhone();
         });
         apply((ProductCreated event) ->{
-            sell.product.productName = event.getProductName();
-            sell.product.productPrice = event.getProductPrice();
+            sell.product = new Product(event.getEntityId(),event.getProductName(),event.getProductPrice());
         });
         apply((SellerCreated event) ->{
             sell.seller.sellerName = event.getSellerName();

@@ -18,15 +18,11 @@ public class StoreChange extends EventChange {
 
         });
         apply((ManagerCreated event) ->{
-            store.manager.managerMail = event.getManagerMail();
-            store.manager.managerName = event.getManagerName();
+            store.manager = new Manager(event.getEntityId(),event.getManagerName(),event.getManagerMail());
+
 
         });
-        apply((ManagerCreated event) ->{
-            store.manager.managerMail = event.getManagerMail();
-            store.manager.managerName = event.getManagerName();
 
-        });
         apply((OwnerCreated event) ->{
             store.owner.ownerName = event.getOwnerName();
             store.owner.ownerPhone = event.getOwnerPhone();

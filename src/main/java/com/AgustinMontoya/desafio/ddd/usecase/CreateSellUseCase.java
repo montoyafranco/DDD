@@ -13,6 +13,7 @@ public class CreateSellUseCase extends UseCase<RequestCommand<CreateSale>, Respo
     @Override
     public void executeUseCase(RequestCommand<CreateSale> createSaleRequestCommand) {
         var command = createSaleRequestCommand.getCommand();
+
         var sale = new Sell(command.getSaleID(),command.getSale_status());
         emit().onResponse(new ResponseEvents(sale.getUncommittedChanges()));
 
